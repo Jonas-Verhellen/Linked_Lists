@@ -6,6 +6,6 @@ source: https://meta.slashdot.org/story/12/10/11/0030249/linus-torvalds-answers-
 
 -------------------------------------------------------------------------------------------------------------------------------
 
-This repo contains two implementations of a simply linked list inspired by the above Linus quote, one using pointers and once using pointers-to-pointers. The latter implementation being markedly more elegant.
+This repo contains two implementations of a simply linked list inspired by the above Linus quote, one using pointers and one using pointers-to-pointers. The latter implementation being markedly more elegant.
 
 
