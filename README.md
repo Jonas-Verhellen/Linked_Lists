@@ -1,2 +1,2 @@
 # linked_lists
-Implementation of a linked list once in a simple and once in a sophisticated way.
+Two implementations of a  simple linked list based on Linus Torvalds interview, once using pointers and once using pointers-to-pointers.
