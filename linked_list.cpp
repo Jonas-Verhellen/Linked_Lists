@@ -4,31 +4,11 @@
 linked_list::linked_list()
 {
 	head = NULL;
-	tail = NULL;
-}
-
-void linked_list::createnode(int value)
-{
-	node *temp = new node;
-	temp->data = value;
-	temp->next = NULL;
-	if(head == NULL)
-	{
-		head = temp;
-		tail = temp;
-		temp = NULL;
-	}
-	else
-	{	
-		tail->next = temp;
-		tail = temp;
-	}
 }
 
 void linked_list::display()
 {
-	node *temp = new node;
-	temp = head;
+	node* temp = this->head;
 	while(temp != NULL)
 	{
 		cout << temp->data << "\t";
@@ -36,63 +16,55 @@ void linked_list::display()
 	}
 }
 
-void linked_list::insert_start(int value)
+void linked_list::createnode(int value)
 {
-	node *temp = new node;
-	temp->data = value;
-	temp->next = head;
-	head = temp;
-}
-
-void linked_list::insert_position(unsigned int pos, int value)
-{
-	node *pre = new node;
-	node *cur = new node;
-	node *temp = new node;
-	cur = head;
-	for(int i=1; i < pos; i++)
+	node** temp = &(this->head);
+	while(*temp != NULL) 
 	{
-		pre = cur;
-		cur = cur->next;
+        temp = &((*temp)->next);
 	}
-   	temp->data = value;
-	pre->next = temp;	
-	temp->next = cur;
-}
-
-void linked_list::delete_first()
-{
-	node *temp = new node;
-	temp = head;
-   	head = head->next;
-	delete temp;
-}
-
-void linked_list::delete_last()
-{
-	node *current = new node;
-	node *previous = new node;
-	current = head;
-	while(current->next != NULL)
-	{
-		previous = current;
-		current = current->next;	
-	}
-	tail = previous;
-	previous->next = NULL;
-	delete current;
+    *temp = new node;
+    (*temp)->data = value;
+    (*temp)->next = NULL;
 }
 
 void linked_list::delete_position(unsigned int pos)
 {
-	node *current = new node;
-	node *previous = new node;
-	current = head;
-	for(int i=1; i < pos; i++)
+    unsigned int pos_node = 0;
+	node** temp = &(this->head);
+	while(*temp != NULL && pos_node != pos) 
 	{
-		previous = current;
-		current = current->next;
+        temp = &((*temp)->next);
+        pos_node++;
 	}
-	previous->next = current->next;
+    if(*temp != NULL)
+    {
+        node* deleted_node = *temp; 
+        *temp = deleted_node->next;
+    }
 }
 
+void linked_list::insert_position(int value, unsigned int pos)
+{
+    unsigned int pos_node = 0;
+	node** temp = &(this->head);
+	while(*temp != NULL && pos_node != pos) 
+	{
+        temp = &((*temp)->next);
+        pos_node++;
+	}
+    if(*temp != NULL)
+    {
+        node* insertion = new node;
+        insertion->data =  (*temp)->data;
+        insertion->next = (*temp)->next;
+        (*temp)->data = value;
+        (*temp)->next = insertion;
+    }
+    else
+    {
+        *temp = new node;
+        (*temp)->data =  value;
+        (*temp)->next = NULL;
+    }
+}
